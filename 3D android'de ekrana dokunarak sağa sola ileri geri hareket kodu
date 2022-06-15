@@ -1,33 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class Player : MonoBehaviour
-{
-    private Rigidbody rb;
+    public float moveSpeed;
 
-    private Touch touch;
-    public int speedModifier;
 
-    public void Start()
+
+    void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
-    }
-
-    void Update()
-    {
-        if (Input.touchCount > 0)
-        {
-            touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Moved)
-            {
-                rb.velocity = new Vector3(touch.deltaPosition.x*speedModifier*Time.deltaTime,
-                                          transform.position.y,
-                                          touch.deltaPosition.y*speedModifier * Time.deltaTime);
-
-            }
-        }
         
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void FixedUpdate()
+    {
+        TouchMove();
+    }
+    void TouchMove()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            //move sağ
+
+            if (mousePos.x > 1)
+            {
+
+                transform.Translate(moveSpeed,0,0);
+
+           
+                //move sol
+            }
+            else if (mousePos.x < -1)
+                transform.Translate(-moveSpeed, 0, 0);
+            {
+
+            }
+           
+
+
+        }
+    }
+
 }
